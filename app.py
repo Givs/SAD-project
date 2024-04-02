@@ -12,6 +12,15 @@ def obter_dados_clima(cidade):
         print(f'Erro ao obter os dados para a cidade {cidade}: {response.text}')
         return None
 
+def obter_data_clima(cidade):
+    url = f"https://api.openweathermap.org/data/2.5/forecast?q={cidade}&appid={API_KEY}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f'Erro ao obter os dados para a cidade {cidade}: {response.text}')
+        return None
+
 def recomendar_materiais_construcao(clima):
     temperatura = clima['main']['temp']
     umidade = clima['main']['humidity']
@@ -225,23 +234,18 @@ total_humidity = 0
 total_wind_speed = 0
 
 for cidade in cidades:
-    dados = obter_dados_clima(cidade)
-    if dados:
-        for forecast in dados['list']:
+    data = obter_data_clima(cidade)
+    if data:
+        for forecast in data['list']:
             total_temp += forecast['main']['temp']
             total_humidity += forecast['main']['humidity']
             total_wind_speed += forecast['wind']['speed']
 
-            num_forecasts = len(dados['list'])
+            num_forecasts = len(data['list'])
             # Calcular as médias
             avg_temp = total_temp / num_forecasts
             avg_humidity = total_humidity / num_forecasts
             avg_wind_speed = total_wind_speed / num_forecasts
-
-    print(num_forecasts)
-    print("Média de temperatura:", avg_temp)
-    print("Média de umidade:", avg_humidity)
-    print("Média de velocidade do vento:", avg_wind_speed)
 
     total_temp = 0
     total_humidity = 0
