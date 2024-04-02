@@ -196,7 +196,7 @@ cidades = ['Aracaju, BR', 'Nossa Senhora do Socorro, BR', 'Lagarto, BR', 'Itabai
            'Nossa Senhora Aparecida, BR', 'Telha, BR', 'Cumbe, BR', 'Feira Nova, BR', 'Pinhão, BR', 'Lagoa Funda, BR', 'Poço Redondo, BR', 'Divina Pastora, BR', 
            'Ilha das Flores, BR', 'Canhoba, BR', 'Santa Rosa de Lima, BR', 'Nossa Senhora de Lourdes, BR', 'Pirambu, BR', 'São Francisco, BR', 'Carira, BR', 
            'Laranjeiras, BR', 'Riachão do Dantas, BR', 'Santa Luzia do Itanhy, BR', 'Porto da Folha, BR', 'Tomar do Geru, BR', 'Aquidabã, BR', 
-           'Santana do São Francisco, BR', 'Carmópolis, BR', 'Macambira, BR', 'Canindé de São Francisco, BR', 'Siriri, BR', 'Pedra Branca, BR']
+           'Santana do São Francisco, BR', 'Carmópolis, BR', 'Macambira, BR', 'Canindé de São Francisco, BR', 'Siriri, BR', 'Pedra Branca, BR', 'Gracho Cardoso, BR']
 
 dados_clima = []
 
