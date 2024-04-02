@@ -5,40 +5,39 @@ import pandas as pd
 API_KEY = 'b70f41432f7ca03f275efffde38b7e96'
 
 def obter_dados_clima(cidade):
-    url = f"//history.openweathermap.org/data/2.5/aggregated/year?q={cidade},GB&appid={API_KEY}"
+    url = f"https://api.openweathermap.org/data/2.5/forecast?q={cidade}&appid={API_KEY}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
     else:
         print(f'Erro ao obter os dados para a cidade {cidade}: {response.text}')
         return None
+        
+# Inicializar variáveis de acumulação
+total_temp = 0
+total_humidity = 0
+total_wind_speed = 0
 
-# Inicializar as variáveis para acumular os valores
-soma_temp = 0
-soma_umidade = 0
-soma_velocidade_vento = 0
-total_dias = 0
+cidades = ['Aracaju, BR', 'Nossa Senhora do Socorro, BR']
 
-cidades = ['Rio de Janeiro', 'São Paulo', 'Brasília', 'Salvador', 'Fortaleza', 'Aracaju']
 
-# Iterar sobre os dados de cada dia
+# Iterar sobre cada previsão
 for cidade in cidades:
     dados = obter_dados_clima(cidade)
-    for dia in dados['result']:
-        # Verificar se o dia tem dados de temperatura, umidade e velocidade do vento
-        if 'temp' in dia and 'humidity' in dia and 'wind' in dia:
-            # Acumular os valores
-            soma_temp += dia['temp']['mean']
-            soma_umidade += dia['humidity']['mean']
-            soma_velocidade_vento += dia['wind']['mean']
-            total_dias += 1
+    if dados:
+        for forecast in dados['list']:
+            total_temp += forecast['main']['temp']
+            total_humidity += forecast['main']['humidity']
+            total_wind_speed += forecast['wind']['speed']
 
+
+num_forecasts = len(dados['list'])
 # Calcular as médias
-media_temp = soma_temp / total_dias
-media_umidade = soma_umidade / total_dias
-media_velocidade_vento = soma_velocidade_vento / total_dias
+avg_temp = total_temp / num_forecasts
+avg_humidity = total_humidity / num_forecasts
+avg_wind_speed = total_wind_speed / num_forecasts
 
-# Imprimir as médias
-print("Média de temperatura ao longo do ano:", media_temp)
-print("Média de umidade ao longo do ano:", media_umidade)
-print("Média de velocidade do vento ao longo do ano:", media_velocidade_vento)
+print(num_forecasts)
+print("Média de temperatura:", avg_temp)
+print("Média de umidade:", avg_humidity)
+print("Média de velocidade do vento:", avg_wind_speed)
