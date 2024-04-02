@@ -232,17 +232,21 @@ for cidade in cidades:
             total_humidity += forecast['main']['humidity']
             total_wind_speed += forecast['wind']['speed']
 
+            num_forecasts = len(dados['list'])
+            # Calcular as médias
+            avg_temp = total_temp / num_forecasts
+            avg_humidity = total_humidity / num_forecasts
+            avg_wind_speed = total_wind_speed / num_forecasts
 
-num_forecasts = len(dados['list'])
-# Calcular as médias
-avg_temp = total_temp / num_forecasts
-avg_humidity = total_humidity / num_forecasts
-avg_wind_speed = total_wind_speed / num_forecasts
+    print(num_forecasts)
+    print("Média de temperatura:", avg_temp)
+    print("Média de umidade:", avg_humidity)
+    print("Média de velocidade do vento:", avg_wind_speed)
 
-print(num_forecasts)
-print("Média de temperatura:", avg_temp)
-print("Média de umidade:", avg_humidity)
-print("Média de velocidade do vento:", avg_wind_speed)
+    total_temp = 0
+    total_humidity = 0
+    total_wind_speed = 0
+
 
 df = pd.DataFrame(dados_clima)
 
